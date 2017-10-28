@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/2.3.2/examples/hero.html -->
+<html lang="en" ng-app="MainApp">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>我的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 10px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="" rel="stylesheet">
+    <link href="./static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+    <script src="./static/js/index.js"></script>
+
+  </head>
+
+  <body>
+    <div ng-controller="App_Controller">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">Home <%= welcome_message %></a>
+        </div>
+          <div> 
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="button" class="btn btn-primary btn-large" ng-show="<%= !isLogged %>"
+                        onClick="location.href='signin'">登录</button>
+                <button type="button" class="btn btn-primary btn-large" ng-show="<%= !isLogged %>"
+                        onClick="location.href='signup'">注册</button>
+                <button type="button" class="btn btn-primary btn-large" ng-show="<%= isLogged %>"
+                        onClick="location.href='signout'">退出</button>
+            </form>
+          </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-lg-7 col-md-7 mx-auto" style="background-image: url('images/02.jpg');background-size:100% 100%; 
+             background-repeat:no-repeat; padding-bottom:350px;">
+        </div>
+        <div class="col-lg-5 col-md-5 mx-auto">
+          <p>一些示例文本。一些示例文本。</p>
+          <p>一些示例文本。一些示例文本。</p>
+          <p>一些示例文本。一些示例文本。</p>
+          <p>一些示例文本。一些示例文本。</p>
+          <p>一些示例文本。一些示例文本。</p>
+          <p>一些示例文本。一些示例文本。</p>
+          <p>一些示例文本。一些示例文本。</p>
+          <p>一些示例文本。一些示例文本。</p>
+          <p>一些示例文本。一些示例文本。</p>
+          <p>一些示例文本。一些示例文本。</p>
+        </div>
+      </div>
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-lg-3 col-md-3 mx-auto">
+          <h2>文章列表</h2>
+            <div class="thumbnail">
+              <a href="/art_list"><img src="images/85.png" alt=""></a>
+              <div class="caption">
+                <h3>文章列表</h3>
+              </div>
+            </div>  <!--End of thumbnail-->
+        </div>  <!--col-lg-3 -->
+        <div class="col-lg-3 col-md-3 mx-auto">
+          <h2>写博客</h2>
+            <div class="thumbnail">
+              <a href="/new_blog"><img src="images/92.png" alt="通用的占位符缩略图">
+              <div class="caption">
+                <h3>写博客</h3>
+              </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 mx-auto">
+          <h2>TODO 1</h2>
+            <div class="thumbnail">
+              <img src="images/at.png" alt="通用的占位符缩略图">
+              <div class="caption">
+                <h3>TODO 1</h3>
+              </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 mx-auto">
+          <h2>TODO 2</h2>
+            <div class="thumbnail">
+              <img src="images/at.png" alt="通用的占位符缩略图">
+              <div class="caption">
+                <h3>TODO 2</h3>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>© Company 2013</p>
+      </footer>
+    </div>
+    </div> <!--End of controller-->
+  </body>
+</html>

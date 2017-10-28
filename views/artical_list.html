@@ -1,0 +1,73 @@
+<html lang="en" ng-app="ARTVIEW_LST">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>我的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 10px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="./static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="./static/css/md.css" rel="stylesheet">
+  </head>
+
+  <body ng-controller="ArtLst_Controller">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Home <%= welcome_message %></a>
+        </div>
+          <div> 
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="button" class="btn btn-primary btn-large" ng-show="<%= !isLogged %>"
+                        onClick="location.href='signin'">登录</button>
+                <button type="button" class="btn btn-primary btn-large" ng-show="<%= !isLogged %>"
+                        onClick="location.href='signup'">注册</button>
+                <button type="button" class="btn btn-primary btn-large" ng-show="<%= isLogged %>"
+                        onClick="location.href='signout'">退出</button>
+            </form>
+          </div>
+        </div>
+    </nav>
+    <div class="container full-height">
+      <div class="row full-height">
+        <div class="col-xs-2">
+        </div>
+        <section class = "col-xs-8 full-height">
+        <div>
+
+          <ul>
+          <% var art_data %>
+          <%for(var i = 0; i < art_data.length; i++) {%>
+            <li>
+              <!-- <img src="http://lorempixum.com/100/100/nature/1" >  -->
+              <a href="/artical_view?artical_id=<%- art_data[i].artical_id%>"><h3> <%= art_data[i].title %> </h3></a>
+              <p><%= art_data[i].username + "............." + art_data[i].timestamp%> </p>
+            </li>
+          <%}%>
+          </ul>
+        </div>
+        </section>
+        <div class="col-xs-2">
+        </div>
+      </div>
+      <hr>
+      <footer>
+        <p>© Company 2013</p>
+      </footer>
+    </div>
+      <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+      <script src="https://cdn.bootcss.com/angular.js/1.5.0-beta.0/angular-sanitize.min.js"></script>
+      <script src="./static/js/artical_list.js"></script>
+  </body>
+</html>
