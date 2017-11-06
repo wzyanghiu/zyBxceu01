@@ -13,8 +13,8 @@ mongoose.Promise = require('bluebird');
 require('./models/users_model.js');
 require('./models/articals_model.js');
 
-var dburl = "mongodb://127.0.0.1:27017/blog01";
-
+//var dburl = "mongodb://127.0.0.1:27017/blog01";
+var dburl = "mongodb://zy_admin_01:wangzhiyu_1980@ds147265.mlab.com:47265/zy_prj_mfdm001"
 mongoose.Promise = global.Promise;
 var conn = mongoose.connect(dburl);
 

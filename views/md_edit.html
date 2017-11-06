@@ -16,36 +16,34 @@
     </style>
     <link href="./static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="./static/css/md.css" rel="stylesheet">
+    <!-- <% var lab_art_title="文章标题" %>-->
   </head>
 
   <body ng-controller="MD_Controller">
-    <nav class="navbar navbar-inverse" role="navigation">
-        <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Home <%= welcome_message %></a>
-        </div>
-          <div> 
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="button" class="btn btn-primary btn-large" ng-show="<%= !isLogged %>"
-                        onClick="location.href='signin'">登录</button>
-                <button type="button" class="btn btn-primary btn-large" ng-show="<%= !isLogged %>"
-                        onClick="location.href='signup'">注册</button>
-                <button type="button" class="btn btn-primary btn-large" ng-show="<%= isLogged %>"
-                        onClick="location.href='signout'">退出</button>
-            </form>
-          </div>
-        </div>
-    </nav>
-
+    <%include top_part.html %>
 
     <form method="post"  action="/savedraft" name="frm_artical">
     <div class="container">
-      <div class="row">
-        <div class="col-xs-10">
-          <input type="text" class="form-control" placeholder="文章标题" ng-model="art_title" name="art_title" >
+      <%include top_nav_part.html %>
+
+      <div class="row pading-bottom_10">
+        <div class="col-xs-6">
+          <input type="text" class="form-control" placeholder="文章标题" ng-model="art_title" name="art_title" 
+                ng-blur = "focusState='Blurred'"
+                ng-focus = "focusState='Focused'"
+                ng-mouseenter = "mouseState='Enered'"
+                ng-mouseleave = "focusState='Left'"
+                ng-mouseclick = "focusState='Clicked'"
+                ng-mousedown = "focusState='Down'"
+                ng-mouseup = "focusState='Up'"
+                ng-keyup = "keyStrokeTitle($event)">
+        </div>
+        <div class="col-xs-6">
+          <section class="col-xs-6">
+          <h4 ng-bind-html="lab_art_title" name="lab_art_title" >
+          </h4>
+          </section>          
+          <!-- <label class="form-control" placeholder="文章标题"> <%- lab_art_title%></label>-->
         </div>
     </div>
     </div>
@@ -83,7 +81,7 @@
       </div>
     </div>
     </form>
-
+    <%include footer.html %>
     <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
     <script src="https://cdn.bootcss.com/angular.js/1.5.0-beta.0/angular-sanitize.min.js"></script>
     <script src="./static/js/markdown-it.js.download"></script>

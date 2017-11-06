@@ -33,6 +33,7 @@ exports.get_artical = function(req, res)
                     res.render('artical_view', {username:  req.session.username, 
                                                 isLogged:  true, 
                                                 welcome_message:welmsg,
+                                                artical_title  : data.title,
                                                 artical_content: data.content});
                 }
                 else
@@ -40,6 +41,7 @@ exports.get_artical = function(req, res)
                     res.render('artical_view', {username:  "", 
                                                 isLogged:  false, 
                                                 welcome_message:welmsg,
+                                                artical_title  : data.title,
                                                 artical_content: data.content});
                 }
             }
@@ -127,9 +129,7 @@ exports.save_draft = function(req, res)
                 else
                 {
                     console.log("Update User success: " + artid);
-                    var redirStr = '/artical_view?artical_id='+artid;    // ok
-
-                    //console.log(redirStr);
+                    var redirStr = '/artical_view?artical_id='+artid;
                     req.session.msg = "Artical post success";
                     res.redirect(redirStr);
                 }

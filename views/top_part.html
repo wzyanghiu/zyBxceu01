@@ -1,0 +1,20 @@
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Home <%= welcome_message %></a>
+        </div>
+          <div> 
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="button" class="btn btn-primary btn-large" ng-show="<%= !isLogged %>"
+                        onClick="location.href='signin'">登录</button>
+                <button type="button" class="btn btn-primary btn-large" ng-show="<%= !isLogged %>"
+                        onClick="location.href='signup'">注册</button>
+                <button type="button" class="btn btn-primary btn-large" ng-show="<%= isLogged %>"
+                        onClick="location.href='signout'">退出</button>
+            </form>
+          </div>
+        </div>
+    </nav>

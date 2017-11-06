@@ -10,16 +10,17 @@ angular.module('MD_APP', ['ngSanitize']).
 
             $scope.keyStroke = function(event)
                 {
-                    //inputTxt = $scope.input_val.val()
                     htmlResult = md.render($scope.md_src);
-                    
                     $scope.md_content = htmlResult;
                 };
 
             $scope.mouseClick = function(event)
                 {
-                    //htmlResult = md.render($scope.md_src);
-                    //$scope.md_content = htmlResult;
+                };
+
+            $scope.keyStrokeTitle = function(event)
+                {
+                    $scope.lab_art_title = $scope.art_title;
                 };
 
             $scope.saveDraft = function(art_type)

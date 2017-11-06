@@ -7,7 +7,6 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 10px;
@@ -19,31 +18,14 @@
   </head>
 
   <body ng-controller="ArtLst_Controller">
-    <nav class="navbar navbar-inverse" role="navigation">
-        <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Home <%= welcome_message %></a>
-        </div>
-          <div> 
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="button" class="btn btn-primary btn-large" ng-show="<%= !isLogged %>"
-                        onClick="location.href='signin'">登录</button>
-                <button type="button" class="btn btn-primary btn-large" ng-show="<%= !isLogged %>"
-                        onClick="location.href='signup'">注册</button>
-                <button type="button" class="btn btn-primary btn-large" ng-show="<%= isLogged %>"
-                        onClick="location.href='signout'">退出</button>
-            </form>
-          </div>
-        </div>
-    </nav>
+    <%include top_part.html %>
+
     <div class="container full-height">
-      <div class="row full-height">
+      <%include top_nav_part.html %>
+      <div class="row">
         <div class="col-xs-2">
         </div>
-        <section class = "col-xs-8 full-height">
+        <section class = "col-xs-8">
         <div>
 
           <ul>
@@ -61,13 +43,13 @@
         <div class="col-xs-2">
         </div>
       </div>
-      <hr>
-      <footer>
-        <p>© Company 2013</p>
-      </footer>
+
     </div>
-      <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
-      <script src="https://cdn.bootcss.com/angular.js/1.5.0-beta.0/angular-sanitize.min.js"></script>
-      <script src="./static/js/artical_list.js"></script>
+
+    <%include footer.html %>
+
+    <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.5.0-beta.0/angular-sanitize.min.js"></script>
+    <script src="./static/js/artical_list.js"></script>
   </body>
 </html>

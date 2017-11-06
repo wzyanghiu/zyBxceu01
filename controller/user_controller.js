@@ -46,6 +46,7 @@ exports.signin = function(req, res)
     User.findOne({username: req.body.username})
     .exec(function(err, user)
     	{
+            console.log("exports.signin");
             console.log("signin: " + req.body.username + " " + req.body.password);            
             if (!user)
             {
@@ -53,10 +54,11 @@ exports.signin = function(req, res)
             }
             else if (user.hs_pwd === hashPW(req.body.password))
             {
+                console.log("exports.signin success");
                 req.session.user = user.id;
                 req.session.username = user.username;
                 req.session.msg = 'Authenticated as ' + user.username;
-                res.redirect('/');              
+                res.redirect('/');
             }
             else
             {
@@ -65,6 +67,7 @@ exports.signin = function(req, res)
 
             if (err)
             {
+                console.log("exports.signin err");
                 req.session.regenerate(function()
                     {
                         console.log("signin failed");
@@ -85,7 +88,6 @@ exports.signout = function(req, res)
                 res.json({ret_code: 2, ret_msg: 'log out failed'});
                 return;
             }
-            //res.clearCookie("user");
             res.redirect('/');
         });
     req.session.user = null;
