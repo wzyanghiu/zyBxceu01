@@ -44,5 +44,6 @@ app.use(expressSession(
             })
 	}));
 
+var serverPort = process.env.PORT || 5000;
 require('./routes')(app);
-app.listen(80);
+app.listen(serverPort);
