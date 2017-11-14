@@ -41,6 +41,20 @@ module.exports = function(app)
             }
         });
 
+    app.get('/cls_mgr', function(req, res)   // TODO: connect with USER
+        {
+            console.log("route: cls_mgr");
+            if (req.session.user)
+            {
+                welmsg = "Welcome " +  req.session.username;
+                res.render('class_mgr', {username: req.session.username, isLogged:true, welcome_message:welmsg});
+            }
+            else
+            {
+                welmsg = "";
+                res.redirect('signin');
+            }
+        });
 
     app.get('/signup', function(req, res)
         {
