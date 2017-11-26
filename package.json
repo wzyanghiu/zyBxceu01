@@ -1,7 +1,6 @@
 {
   "name": "blgdmo1",
   "version": "1.0.0",
-  "description": "",
   "main": "routes.js",
   "dependencies": {
     "body-parser": "^1.16.0",
@@ -28,5 +27,6 @@
   "bugs": {
     "url": "https://github.com/wzyanghiu/zyBxceu01/issues"
   },
-  "homepage": "https://github.com/wzyanghiu/zyBxceu01#readme"
+  "homepage": "https://github.com/wzyanghiu/zyBxceu01#readme",
+  "description": ""
 }

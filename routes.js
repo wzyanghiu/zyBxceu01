@@ -32,7 +32,7 @@ module.exports = function(app)
             if (req.session.user)
             {
                 welmsg = "Welcome " +  req.session.username;
-                res.render('md_edit', {username: req.session.username, isLogged:true, welcome_message:welmsg});
+                res.render('artical_new', {username: req.session.username, isLogged:true, welcome_message:welmsg});
             }
             else
             {
@@ -41,13 +41,14 @@ module.exports = function(app)
             }
         });
 
-    app.get('/cls_mgr', function(req, res)   // TODO: connect with USER
+/*
+    app.get('/art_mgr', function(req, res)   // TODO: connect with USER
         {
             console.log("route: cls_mgr");
             if (req.session.user)
             {
                 welmsg = "Welcome " +  req.session.username;
-                res.render('class_mgr', {username: req.session.username, isLogged:true, welcome_message:welmsg});
+                res.render('art_mgr', {username: req.session.username, isLogged:true, welcome_message:welmsg});
             }
             else
             {
@@ -55,6 +56,7 @@ module.exports = function(app)
                 res.redirect('signin');
             }
         });
+//*/
 
     app.get('/signup', function(req, res)
         {
@@ -92,7 +94,7 @@ module.exports = function(app)
             console.log("route: signout  { ");
             if (req.session.user)
             {
-                req.session.destroy(function(err) 
+                req.session.destroy(function(err)
                     {
                         console.log("user controller -> signout()");
                         if(err)
@@ -111,10 +113,13 @@ module.exports = function(app)
 
     app.get('/artical_view/:artical_id?',articals.get_artical);
     app.get('/art_list', articals.get_all_artical);
+    app.get('/art_mgr', articals.get_all_mine_artical);
+    app.get('/art_edit/:artical_id?',articals.get_artical_to_edit);
 
 
     app.post('/signup' , users.signup);
     app.post('/signin' , users.signin);
-    app.post('/savedraft',  articals.save_draft);
+    app.post('/art_save_new',  articals.save_new_artical);
+    app.post('/art_save_edit',  articals.save_edit_artical);    
     //app.post('/viewartical',  articals.get_artical);
 }

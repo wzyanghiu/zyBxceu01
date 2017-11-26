@@ -1,17 +1,23 @@
 var md = window.markdownit();
 
-var htmlResult = "";
-var inputTxt = "";
-var title = "";
-
-angular.module('MD_APP', ['ngSanitize']).
-    controller('MD_Controller', ['$scope', '$http', '$sce', function($scope, $http, $sce)
+angular.module('MD_EDIT_APP', ['ngSanitize']).
+    controller('MD_Edit_Controller', ['$scope', '$http', '$sce', function($scope, $http, $sce)
     	{
+            $scope.md_src = $("#id_input_val").val();
+            $scope.art_title = $("#id_disp_art_title").val();
+
+            if (($scope.md_src != null) || ($scope.md_src != ""))
+            {
+                $scope.md_content = md.render($scope.md_src)
+            }
+
+            $scope.art_title = $("#id_art_title").val();
+            $scope.lab_art_title = $("#id_art_title").val();
 
             $scope.keyStroke = function(event)
                 {
-                    htmlResult = md.render($scope.md_src);
-                    $scope.md_content = htmlResult;
+                    if (($scope.md_src != null) || ($scope.md_src != ""))
+                        $scope.md_content = md.render($scope.md_src);
                 };
 
             $scope.mouseClick = function(event)
@@ -25,6 +31,7 @@ angular.module('MD_APP', ['ngSanitize']).
 
             $scope.saveDraft = function(art_type)
             {
+                var title = "";
                 var oDate = new Date();
                 var strDate = oDate.getFullYear().toString() + (oDate.getMonth()+1).toString() + oDate.getDate().toString()
                               + oDate.getHours().toString() + oDate.getMinutes().toString() + oDate.getSeconds().toString();

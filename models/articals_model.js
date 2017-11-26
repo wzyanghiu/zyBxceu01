@@ -7,7 +7,8 @@ var ArticalSchema = new Schema({
     username    : {type : String},
 	title       : {type : String},
     type        : {type : String},  // d: draft;  p: public;
-    content     : {type : String},
+    edit_content: {type : String},    
+    disp_content: {type : String},
     timestamp   : {type : Date, default:Date.now},
 });
 

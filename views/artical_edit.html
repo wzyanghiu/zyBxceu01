@@ -1,4 +1,4 @@
-<html lang="en" ng-app="MD_APP">
+<html lang="en" ng-app="MD_EDIT_APP">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>我的博客</title>
@@ -16,21 +16,20 @@
     </style>
     <link href="./static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="./static/css/md.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./static/vendor/jquery/js/3.2.1/jquery.min.js"></script>
     <script src="./static/vendor/bootstrap/js/bootstrap.js"></script>
-    <!-- <% var lab_art_title="文章标题" %>-->
   </head>
 
-  <body ng-controller="MD_Controller">
+  <body ng-controller="MD_Edit_Controller">
     <%include top_part.html %>
 
-    <form method="post"  action="/savedraft" name="frm_artical">
+    <form method="post"  action="/art_save_edit" name="frm_artical">
     <div class="container">
       <%include top_nav_part.html %>
-
+      <input type="hidden" name="nm_hid_art_id" value="<%- param_art_id %>"> 
       <div class="row pading-bottom_10">
         <div class="col-xs-6">
-          <input type="text" class="form-control" placeholder="文章标题" ng-model="art_title" name="art_title" 
+          <input type="text" class="form-control" placeholder="文章标题" ng-model="art_title" name="nm_art_title" id="id_art_title"
                 ng-blur = "focusState='Blurred'"
                 ng-focus = "focusState='Focused'"
                 ng-mouseenter = "mouseState='Enered'"
@@ -38,16 +37,16 @@
                 ng-mouseclick = "focusState='Clicked'"
                 ng-mousedown = "focusState='Down'"
                 ng-mouseup = "focusState='Up'"
-                ng-keyup = "keyStrokeTitle($event)">
+                ng-keyup = "keyStrokeTitle($event)"
+                value="<%- value_art_title %>">
         </div>
         <div class="col-xs-6">
           <section class="col-xs-6">
-          <h4 ng-bind-html="lab_art_title" name="lab_art_title" >
-          </h4>
-          </section>          
-          <!-- <label class="form-control" placeholder="文章标题"> <%- lab_art_title%></label>-->
+          <h4 ng-bind-html="lab_art_title" name="lab_art_title" ng-model="disp_art_title" id="id_disp_art_title">
+            <%- param_disp_art_title %></h4>
+          </section>
         </div>
-    </div>
+      </div>
     </div>
 
     <div class="container full-height">
@@ -70,12 +69,7 @@
                   <span class="input-group-addon">标题</span>
                   <input id="msg" type="text" class="form-control" name="class_title" placeholder="Additional Info">
                 </div>
-         
-                <!-- <div class="input-group" style="margin-bottom: 10px;">
-                  <span class="input-group-addon">位置</span>
-                  <input id="msg" type="text" class="form-control" name="class_title" placeholder="Additional Info">
-                </div> -->
-         
+
                 <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">URL
                   <span class="caret"></span></button>
@@ -110,7 +104,7 @@
 
       <div class="row full-height">
         <div class="col-xs-6 full-height">
-          <textarea class="source full-height" name="input_val"
+          <textarea class="source full-height" name="input_val" id="id_input_val"
             ng-blur = "focusState='Blurred'"
             ng-focus = "focusState='Focused'"
             ng-mouseenter = "mouseState='Enered'"
@@ -120,11 +114,12 @@
             ng-mouseup = "focusState='Up'"
             ng-keyup = "keyStroke($event)"
             ng-click = "mouseClick($event)"
-            ng-model = "md_src"></textarea>
+            ng-model = "md_src"><%- param_edit_content %></textarea>
         </div>
 
         <section class="col-xs-6 full-height">
-        <div class="result-html full-height" ng-bind-html="md_content" name="result_content" >
+        <div class="result-html full-height" ng-bind-html="md_content" name="result_content" id="id_output_val">
+          <%- param_disp_content %>
         </div>
         </section>
       </div>
@@ -141,9 +136,9 @@
     </div>
     </form>
     <%include footer.html %>
-    <script src="https://code.angularjs.org/1.2.9/angular.min.js"></script>
-    <script src="https://cdn.bootcss.com/angular.js/1.5.0-beta.0/angular-sanitize.min.js"></script>
+    <script src="./static/vendor/angular/1.2.9/angular.min.js"></script>
+    <script src="./static/vendor/angular/1.2.9/angular-sanitize.min.js"></script>
     <script src="./static/js/markdown-it.js.download"></script>
-    <script src="./static/js/md_edit.js"></script>
+    <script src="./static/js/artical_edit.js"></script>
   </body>
 </html>
