@@ -1,0 +1,152 @@
+<html lang="en" ng-app="MD_NEW_APP">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>我的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 10px;
+        padding-bottom: 40px;
+      }
+      .file {
+        visibility: hidden;
+        position: absolute;
+      }
+    </style>
+    <link href="./static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="./static/css/md.css" rel="stylesheet">
+    <!--<link href="./static/css/upload.css" rel="stylesheet">  -->
+    <script src="./static/vendor/jquery/js/3.2.1/jquery.min.js"></script>
+    <script src="./static/vendor/bootstrap/js/bootstrap.js"></script>
+  </head>
+
+  <body ng-controller="MD_New_Controller">
+    <%include top_part.html %>
+
+    <form method="post"  action="/art_save_new" name="frm_artical">
+    <div class="container">
+      <%include top_nav_part.html %>
+
+      <div class="row pading-bottom_10">
+        <div class="col-xs-6">
+          <input type="text" class="form-control" placeholder="文章标题" ng-model="art_title" name="nm_art_title"
+                ng-blur = "focusState='Blurred'"
+                ng-focus = "focusState='Focused'"
+                ng-mouseenter = "mouseState='Enered'"
+                ng-mouseleave = "focusState='Left'"
+                ng-mouseclick = "focusState='Clicked'"
+                ng-mousedown = "focusState='Down'"
+                ng-mouseup = "focusState='Up'"
+                ng-keyup = "keyStrokeTitle($event)">
+        </div>
+        <div class="col-xs-6">
+          <section class="col-xs-6">
+          <h4 ng-bind-html="lab_art_title" name="lab_art_title" ng-model="disp_art_title"></h4>
+          </section>          
+        </div>
+        
+    </div>
+    </div>
+
+    <div class="container full-height">
+
+    <div class="row pading-bottom_10">
+      <div class="col-xs-6">
+      <div class="btn-group btn-group-sm">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#btnInsertPic">图片</button>
+        <div class="modal fade" id="btnInsertPic" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+              </div>
+              <div class="modal-body" >
+                <div class="form-group">
+                  <!-- <input id="upload-input" type="file" class="file" name="uploads[]" multiple="multiple"> -->
+                  <input id="upload-input" type="file" class="file" name="uploads[]">
+                  <div class="input-group col-xs-12">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+                    <input type="text" id="id_upload_name" class="form-control input-lg" disabled placeholder="Upload Image">
+                    <span class="input-group-btn">
+                      <button class="browse btn btn-primary input-lg upload-btn" type="button"><i class="glyphicon glyphicon-search"></i> 
+                        选择文件
+                      </button>
+                    </span>
+                  </div>
+
+                </div>
+
+                <div class="input-group col-xs-12">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-share-alt"></i></span>
+                  <input type="text" id="id_upload_url" class="form-control input-lg" disabled placeholder="URL">
+                  <span class="input-group-btn">
+                    <button class="browse btn btn-primary input-lg copy-url-btn" type="button" onClick='CopyToClipboard()'>
+                      <i class="glyphicon glyphicon-circle-arrow-down"></i> 复制URL
+                    </button>
+                  </span>
+                </div>
+              </div>
+         
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-default">按钮 2</button>
+        <button type="button" class="btn btn-default">按钮 3</button>
+      </div>
+      </div>
+      <div class="col-xs-6"></div>
+    </div>
+
+
+      <div class="row full-height">
+        <div class="col-xs-6 full-height">
+          <textarea class="source full-height" name="input_val"
+            ng-blur = "focusState='Blurred'"
+            ng-focus = "focusState='Focused'"
+            ng-mouseenter = "mouseState='Enered'"
+            ng-mouseleave = "focusState='Left'"
+            ng-mouseclick = "focusState='Clicked'"
+            ng-mousedown = "focusState='Down'"
+            ng-mouseup = "focusState='Up'"
+            ng-keyup = "keyStroke($event)"
+            ng-click = "mouseClick($event)"
+            ng-model = "md_src"></textarea>
+        </div>
+
+        <section class="col-xs-6 full-height">
+        <div class="result-html full-height" ng-bind-html="md_content" name="result_content">
+        </div>
+        </section>
+      </div>
+      <div class="row">
+        <div class="col-xs-10">
+        </div>
+        <div class="col-xs-1">
+          <button type="submit" class="btn" name="btnSave" value="d">存草稿</button>
+        </div>
+        <div class="col-xs-1">
+          <button type="submit" class="btn" name="btnSave" value="p">发布</button>
+        </div>
+      </div>
+    </div>
+    </form>
+    <%include footer.html %>
+    <script src="./static/vendor/angular/1.2.9/angular.min.js"></script>
+    <script src="./static/vendor/angular/1.2.9/angular-sanitize.min.js"></script>
+    <script src="./static/js/markdown-it.js.download"></script>
+    <script src="./static/js/artical_new.js"></script>
+    <script src="./static/js/upload.js"></script>
+  </body>
+</html>
