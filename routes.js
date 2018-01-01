@@ -1,5 +1,10 @@
 var express = require('express');
+var formidable = require('formidable');
+var path = require('path');
+var fs = require('fs');
+var URL = require('url');
 
+const uuidv1 = require('uuid/v1');
 
 module.exports = function(app)
 {
@@ -32,7 +37,7 @@ module.exports = function(app)
             if (req.session.user)
             {
                 welmsg = "Welcome " +  req.session.username;
-                res.render('artical_new', {username: req.session.username, isLogged:true, welcome_message:welmsg});
+                res.render('artical_new_froala', {username: req.session.username, isLogged:true, welcome_message:welmsg, ret_url:""});                
             }
             else
             {
@@ -40,23 +45,6 @@ module.exports = function(app)
                 res.redirect('signin');
             }
         });
-
-/*
-    app.get('/art_mgr', function(req, res)   // TODO: connect with USER
-        {
-            console.log("route: cls_mgr");
-            if (req.session.user)
-            {
-                welmsg = "Welcome " +  req.session.username;
-                res.render('art_mgr', {username: req.session.username, isLogged:true, welcome_message:welmsg});
-            }
-            else
-            {
-                welmsg = "";
-                res.redirect('signin');
-            }
-        });
-//*/
 
     app.get('/signup', function(req, res)
         {
@@ -115,11 +103,80 @@ module.exports = function(app)
     app.get('/art_list', articals.get_all_artical);
     app.get('/art_mgr', articals.get_all_mine_artical);
     app.get('/art_edit/:artical_id?',articals.get_artical_to_edit);
+    app.get('/art_edit_rm/:artical_id?',articals.get_artical_to_remove);
+    app.get('/uploads/:pic_file_name?', function(req, res)
+        { 
+            var arg = URL.parse(req.url, true).query; 
+            var img = fs.readFileSync('./uploads/' + arg.pic_file_name); 
+            res.writeHead(200, {'Content-Type': 'image/jpeg' }); 
+            res.end(img, 'binary'); 
+        });
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    app.post('/froala_save', articals.save_new_artical_froala);
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
     app.post('/signup' , users.signup);
     app.post('/signin' , users.signin);
     app.post('/art_save_new',  articals.save_new_artical);
-    app.post('/art_save_edit',  articals.save_edit_artical);    
-    //app.post('/viewartical',  articals.get_artical);
+    app.post('/art_save_edit',  articals.save_edit_artical);
+    app.post('/uploads', function(req, res)   // TODO: connect with USER
+        {
+            console.log("app.post upload {");
+            // create an incoming form object
+            var form = new formidable.IncomingForm();
+            var strFileName = uuidv1();
+            var extName = "";
+            form.multiples = true;
+            var retUrl = "";
+
+            form.uploadDir = path.join(__dirname, '/uploads');
+
+            // every time a file has been uploaded successfully,
+            // rename it to it's orignal name
+            form.on('file', function(field, file)
+                {
+                    //console.log(file);
+                    switch (file.type) 
+                    {
+                        case "image/pjpeg":
+                            extName = "jpg";
+                            break;
+                        case "image/jpeg":
+                            extName = "jpg";
+                            break;         
+                        case "image/png":
+                            extName = "png";
+                            break;
+                        case "image/x-png":
+                            extName = "png";
+                            break;
+                    }
+
+                    console.log("Upload URL: " + form.uploadDir + "\\" + strFileName +"."+extName);
+                    strFileName = strFileName + "."+extName;
+                    fs.renameSync(file.path, path.join(form.uploadDir, strFileName));
+                });
+            // log any errors that occur
+            form.on('error', function(err) 
+                {
+                    console.log('An error has occured: \n' + err);
+                });
+
+            // once all the files have been uploaded, send a response to the client
+            form.on('end', function() 
+                {
+
+                    retUrl = "http://127.0.0.1/uploads?pic_file_name=" + strFileName;
+                    var data = {link: retUrl};
+                    
+                    console.log('upload success : ' + retUrl);
+                    res.end(JSON.stringify(data))                     
+                });
+
+            form.parse(req);
+
+
+	   });
 }

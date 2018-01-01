@@ -13,7 +13,6 @@ mongoose.Promise = require('bluebird');
 require('./models/users_model.js');
 require('./models/articals_model.js');
 
-//var dburl = "mongodb://127.0.0.1:27017/blog01";
 var dburl = "mongodb://zy_admin_01:wangzhiyu_1980@ds147265.mlab.com:47265/zy_prj_mfdm001"
 mongoose.Promise = global.Promise;
 var conn = mongoose.connect(dburl);
@@ -40,11 +39,11 @@ app.use(expressSession(
             	//db: mongoose.connection.db,
             	//collection: 'sessions',
             	url:dburl,
-            	ttl:24 * 60 * 60
+            	ttl:2 * 60 * 60
             })
 	}));
 
 var serverPort = process.env.PORT || 5000;
-//var serverPort = 80;
+
 require('./routes')(app);
 app.listen(serverPort);
