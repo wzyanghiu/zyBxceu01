@@ -1,0 +1,1 @@
+This folder is working for saveing the upload pictures.
