@@ -13,6 +13,10 @@
         padding-top: 10px;
         padding-bottom: 40px;
       }
+      .file {
+        visibility: hidden;
+        position: absolute;
+      }
     </style>
     <link href="./static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="./static/css/md.css" rel="stylesheet">
@@ -22,9 +26,6 @@
 
   <body ng-controller="MD_New_Controller">
     <%include top_part.html %>
-
-    <!-- <% var edit_content %>
-    <% var disp_content %>-->
 
     <form method="post"  action="/art_save_new" name="frm_artical">
     <div class="container">
@@ -46,8 +47,8 @@
           <section class="col-xs-6">
           <h4 ng-bind-html="lab_art_title" name="lab_art_title" ng-model="disp_art_title"></h4>
           </section>          
-
         </div>
+        
     </div>
     </div>
 
@@ -146,5 +147,6 @@
     <script src="./static/vendor/angular/1.2.9/angular-sanitize.min.js"></script>
     <script src="./static/js/markdown-it.js.download"></script>
     <script src="./static/js/artical_new.js"></script>
+    <script src="./static/js/upload.js"></script>
   </body>
 </html>

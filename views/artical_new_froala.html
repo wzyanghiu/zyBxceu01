@@ -1,0 +1,145 @@
+<html lang="en" ng-app="ARTVIEW_APP">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>我的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 10px;
+        padding-bottom: 40px;
+      }
+    </style>
+
+	<!--
+    <script src="./static/vendor/jquery/js/3.2.1/jquery.min.js"></script>
+    <script src="./static/vendor/bootstrap/js/bootstrap.js"></script>
+    -->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+    <link href="./static/css/md.css" rel="stylesheet">
+    <link href="./static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <link href="./static/vendor/front_awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="./static/vendor/codemirror/5.25.0/css/codemirror.css" rel="stylesheet">
+ 
+    <!-- Include Editor style. -->
+    <link href="./static/vendor/froala/2.7.3/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="./static/vendor/froala/2.7.3/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body ng-controller="ArtVw_Controller">
+    <%include top_part.html %>
+
+    <form action="froala_save" method="POST">
+      <div class="row pading-bottom_30">
+        <div class="col-xs-2">
+        </div>
+        <div class="col-xs-8">
+            <div class="input-group">
+                    <input type="text" class="form-control" placeholder="文章标题" ng-model="art_title" name="nm_art_title">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default 
+                        dropdown-toggle" data-toggle="dropdown">下拉菜单
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="#">功能</a>
+                            </li>
+                            <li>
+                                <a href="#">另一个功能</a>
+                            </li>
+                            <li>
+                                <a href="#">其他</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">分离的链接</a>
+                            </li>
+                        </ul>
+                    </div><!-- /btn-group -->
+            </div><!-- /input-group -->
+        </div>
+        <div class="col-xs-2">
+        </div>
+      </div>
+      <!-- Create a tag that we will use as the editable area. -->
+      <!-- You can use a div tag as well. -->
+      <div class="row">
+        <div class="col-xs-2"></div>  
+        <div class="col-xs-8">      
+          <textarea name="editor_content" id="myEditor"></textarea>
+        </div>
+        <div class="col-xs-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-9"></div>  
+        <div class="col-xs-2">      
+          <button>Submit</button>
+        </div>
+        <div class="col-xs-1"></div>      
+      </div>
+    </form>
+
+
+    <!-- Include external JS libs. -->
+    <!--
+	<script type="text/javascript" src="./static/vendor/codemirror/5.25.0/codemirror.js"></script>
+    <script type="text/javascript" src="./static/vendor/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+    -->
+	
+    <!-- Include Editor JS files. -->
+    <!-- 
+	<script type="text/javascript" src="./static/vendor/froala/2.7.3/js/froala_editor.pkgd.min.js"></script>
+    <script type="text/javascript" src="./static/vendor/froala/2.7.3/js/plugins/image.min.js"></script>
+    -->
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+	
+    <script type="text/javascript" src="https://cdn.bootcss.com/froala-editor/2.7.3/js/froala_editor.pkgd.min.js"></script>
+	<script type="text/javascript" src="./static/vendor/froala/2.7.3/js/plugins/image.min.js"></script>
+
+    <!-- Initialize the editor. -->
+    <script> $(function() { $('textarea').froalaEditor() }); </script>
+    <script>
+      $(function() {
+        
+          $('#myEditor').froalaEditor({
+            saveInterval: 0,
+
+            toolbarInline: false,
+            // Set the image upload URL.
+            imageUploadURL: 'http://127.0.0.1/uploads',
+            imageManagerLoadURL: '/uploads',
+     
+            // Additional upload params.
+            imageUploadParams: {id: 'my_editor'},
+     
+            // Set request type.
+            imageUploadMethod: 'POST',
+     
+            // Set max image size to 5MB.
+            imageMaxSize: 5 * 1024 * 1024,
+     
+            // Allow to upload PNG and JPG.
+            imageAllowedTypes: ['jpeg', 'jpg', 'png']
+        })
+      });
+    </script>
+
+    <%include footer.html %>
+    <!-- <script src="./static/vendor/angular/1.2.9/angular.min.js"></script>
+	     <script src="./static/vendor/angular/1.2.9/angular-sanitize.min.js"></script>-->
+	<script src="https://code.angularjs.org/1.2.9/angular.min.js"></script>
+	<script src="https://code.angularjs.org/1.2.9/angular-sanitize.min.js"></script>
+    <script src="./static/js/artical_view.js"></script>
+  </body>
+</html>

@@ -34,7 +34,7 @@
               <!-- <img src="http://lorempixum.com/100/100/nature/1" >  -->
               <a href="/art_edit?artical_id=<%- art_data[i].artical_id%>"><h3> <%= art_data[i].title %> </h3></a>
               <p><%= art_data[i].username + "............." + art_data[i].timestamp%> </p>
-              <button type="button" class="btn btn-default" onClick="location.href='art_list'">删除</button>
+              <button type="button" class="btn btn-default" onClick="location.href='art_edit_rm?artical_id=<%- art_data[i].artical_id%>'">删除</button>
             </li>
           <%}%>
           </ul>
