@@ -1,0 +1,55 @@
+<html lang="en" ng-app="ART_MGR">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>我的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <style type="text/css">
+      body {
+        padding-top: 10px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="./static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="./static/css/md.css" rel="stylesheet">
+  </head>
+
+  <body ng-controller="ArtMgr_Controller">
+    <%include top_part.html %>
+
+    <div class="container full-height">
+      <%include top_nav_part.html %>
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <section class = "col-xs-8">
+        <div>
+
+          <ul>
+          <% var art_data %>
+          <%for(var i = 0; i < art_data.length; i++) {%>
+            <li>
+              <!-- <img src="http://lorempixum.com/100/100/nature/1" >  -->
+              <a href="/art_edit?artical_id=<%- art_data[i].artical_id%>"><h3> <%= art_data[i].title %> </h3></a>
+              <p><%= art_data[i].username + "............." + art_data[i].timestamp%> </p>
+              <button type="button" class="btn btn-default" onClick="location.href='art_list'">删除</button>
+            </li>
+          <%}%>
+          </ul>
+        </div>
+        </section>
+        <div class="col-xs-2"></div>
+      </div>
+
+    </div>
+
+    <%include footer.html %>
+
+    <script src="./static/vendor/angular/1.2.9/angular.min.js"></script>
+    <script src="./static/vendor/angular/1.2.9/angular-sanitize.min.js"></script>
+
+    <script src="./static/js/artical_mgr.js"></script>
+  </body>
+</html>
